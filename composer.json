@@ -1,11 +1,15 @@
 {
-  "name": "joseraul/alpha-vantage-api",
+  "name": "meeshal/alpha-vantage-api",
   "license": "MIT",
-  "description": "Framework agnostic PHP client for the Alpha Vantage service",
+  "description": "Framework agnostic PHP client for the Alpha Vantage service. Its a fork of joseraul/alpha-vantage-api",
   "authors": [
     {
       "name": "Jose Raul Perez",
       "email": "joseraul.perezfrias@gmail.com"
+    },
+    {
+      "name": "Meeshal k",
+      "email": "meeshal1994@gmail.com"
     }
   ],
   "require": {
