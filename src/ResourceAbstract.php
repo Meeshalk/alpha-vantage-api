@@ -12,6 +12,7 @@ abstract class ResourceAbstract
 
     protected $http_client;
     protected $api_key;
+    protected $return_type;
     protected $base_url = 'https://www.alphavantage.co/query';
 
     /**
@@ -20,11 +21,13 @@ abstract class ResourceAbstract
      * @param $api_key
      * @param null $http_client
      */
-    public function __construct($api_key, $http_client = null)
+    public function __construct($api_key, $return_type, $http_client = null)
     {
         if(is_null($http_client)) {
             $http_client = new Client();
         }
+
+        $this->return_type = $return_type;
         $this->http_client = $http_client;
         $this->api_key = $api_key;
     }
@@ -52,6 +55,10 @@ abstract class ResourceAbstract
      */
     protected function filterResponse(\Psr\Http\Message\ResponseInterface $response)
     {
-        return json_decode($response->getBody()->getContents(), true);
+        $body = $response->getBody()->getContents();
+        if($this->return_type == 'raw')
+            return $body;
+
+        return json_decode($body, true);
     }
 }

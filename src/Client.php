@@ -27,16 +27,20 @@ class Client
      * @param Currency|null $currency_client
      * @param Indicator|null $indicator_client
      */
-    public function __construct($api_key, Stock $stock_client = null, Currency $currency_client = null, Indicator $indicator_client = null)
+    public function __construct($api_key, $response_type = null, Stock $stock_client = null, Currency $currency_client = null, Indicator $indicator_client = null)
     {
+        if(is_null($response_type)){
+            $response_type = 'processed';
+        }
+        
         if (is_null($stock_client)) {
-            $stock_client = new Stock($api_key);
+            $stock_client = new Stock($api_key, $response_type);
         }
         if (is_null($currency_client)) {
-            $currency_client = new Currency($api_key);
+            $currency_client = new Currency($api_key, $response_type);
         }
         if (is_null($indicator_client)) {
-            $indicator_client = new Indicator($api_key);
+            $indicator_client = new Indicator($api_key, $response_type);
         }
         $this->stock_client = $stock_client;
         $this->currency_client = $currency_client;
